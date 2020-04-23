@@ -3,10 +3,30 @@ from selenium import webdriver
 import sys
 from time import sleep
 from pytube import YouTube
+import googletrans
+from googletrans import Translator
 
 
-
-
+def tradutor():
+    translator = Translator()
+    language_list = print('As linguas que sei falar no momento são:\n')
+    sleep(2)
+    print(googletrans.LANGUAGES)
+    sleep(2)
+    lg = input('Para qual idioma deseja traduzir?')
+    if lg in (googletrans.LANGUAGES):
+        texto = input('O que deseja traduzir:\n-->')
+        traduzido = translator.translate(texto, dest=lg)
+        print(traduzido.text)
+        again = input('Deseja traduzir mais alguma coisa?')
+        if again == 'sim':
+            tradutor()
+        else:
+            pass
+    else:
+        print('Eu não conheço este idioma, por favor insira outro idioma')
+        tradutor()
+    sleep(5)    
 def pesquisar_Google():#PESQUISA DO GOOGLE
     pesquisar = input('O que você quer pesquisar?\n:')
     url = 'https://google.com/search?q=' + pesquisar
@@ -15,6 +35,7 @@ def pesquisar_Google():#PESQUISA DO GOOGLE
     driver = webdriver.Firefox(executable_path=r'C:\geckodriver.exe')
     driver.get(url)
     print('Aqui está oque eu achei!!!')
+    sleep(5)
 
 def localizar_Maps():#PESQUISA GOOGLE MAPS
     location = input('Qual o lugar deseja localizar?\n:')
@@ -24,6 +45,7 @@ def localizar_Maps():#PESQUISA GOOGLE MAPS
     driver = webdriver.Firefox(executable_path=r'C:\geckodriver.exe')
     driver.get(url)
     print('Aqui está a localização de' + location)
+    sleep(5)
 
 def youtube_Video():#ABRE VIDEOS DO YOUTUBE/BAIXA TAMBÉM
     download = ['download','baixar','baixar video', 'baixe esse video']
@@ -56,6 +78,7 @@ def youtube_Video():#ABRE VIDEOS DO YOUTUBE/BAIXA TAMBÉM
         print('Baixando o video!!')
         stream.download()
         print("Download Completo")
+    sleep(5)
 
 def downtube():#BAIXA VIDEOS DO YOUTUBE PELO LINK FORNECIDO
     url = input('Me informe o link do video por favor..\n:')
@@ -64,6 +87,13 @@ def downtube():#BAIXA VIDEOS DO YOUTUBE PELO LINK FORNECIDO
     print('Estou baixando o video')
     stram.download()
     print('Download completo!!!')
+    sleep(5)
+    again = input('Deseja baixar mais algum video?')
+    if again == 'sim':
+        downtube()
+    else:
+        sleep(5)
+        pass
 
 
 
@@ -75,6 +105,7 @@ def respond(voce):#AQUI REALIZA AS FUNÇÕES QUE SÃO REQUISITADAS PELO USUARIO,
     maps = ['localizar', 'google maps', 'procure no google maps']
     video = ['video', 'abrir youtube', 'eu quero assistir um video']
     download = ['download','baixar','baixar video', 'baixe esse video']
+    traduzir = ['traduza', 'eu quero traduzir', 'traduzir', 'tradutor']
     
 
     if voce in nome:
@@ -95,13 +126,15 @@ def respond(voce):#AQUI REALIZA AS FUNÇÕES QUE SÃO REQUISITADAS PELO USUARIO,
             downtube()
         else:
             youtube_Video()
+    elif voce in traduzir:
+        tradutor()
     elif voce in ['sair']:#SAIR DO PROGRAMA
         print('Até mais!')
         sys.exit()
 
-def hanna_quest():
-    print(' Olá meu nome é Hanna, sua assistente virtual!!\n No momento estou realizando as seguintes tarefas:\n Pesquisas no google, Pesquisas no Youtube, Pesquisas no GoogleMaps.\n Por favor me diga como posso ajudar??')
+sleep(1)
+while 1:
+    print(' Olá meu nome é Hanna, sua assistente virtual!!\n No momento estou realizando as seguintes tarefas:\n Pesquisas no google, Pesquisas e Download do Youtube, Pesquisas no GoogleMaps e Tradução de textos.\n Por favor me diga como posso ajudar??')
     voce = input(' :')
     respond(voce)
 
-hanna_quest()
