@@ -110,16 +110,16 @@ def respond(voce):#AQUI REALIZA AS FUNÇÕES QUE SÃO REQUISITADAS PELO USUARIO,
 
     if voce in nome:
         print('Meu nome é Hanna, prazer em te conhecer!!') 
-        hanna_quest()   
+        sleep(2)
     elif voce in pesquisas:#FAZ PESQUISAS NO GOOGLE
         pesquisar_Google()
-        hanna_quest()
+        sleep(2)
     elif voce in maps:#FAZ PESQUISAS NO GOOGLE MAPS
         localizar_Maps()
-        hanna_quest()
+        sleep(2)
     elif voce in video:#ABRE VIDEOS NO YOUTUBE
         youtube_Video()
-        hanna_quest()
+        sleep(2)
     elif voce in download:#DOWNLOAD DE VIDEOS DO YOUTUBE
         qst = input('Voce tem o link do video?')
         if qst == 'sim':
@@ -128,8 +128,10 @@ def respond(voce):#AQUI REALIZA AS FUNÇÕES QUE SÃO REQUISITADAS PELO USUARIO,
             youtube_Video()
     elif voce in traduzir:
         tradutor()
+        sleep(2)
     elif voce in ['sair']:#SAIR DO PROGRAMA
         print('Até mais!')
+        sleep(1)
         sys.exit()
 
 sleep(1)
